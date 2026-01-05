@@ -1,0 +1,67 @@
+ два способа создать mock для Junit 5
+
+ #1
+ @ExtendWith(MockitoExtension.class)
+ public class MockAnnotationExampleTest {
+
+ @Mock/@Spy
+ Repository repo mockedList;
+
+ @InjectMocks создает экземпляр тестируемого класса и вставляет туда все моки (@Mock, @Spy), которые подходят по типу
+ Service service;
+
+ #2
+ WriterRepository mock = Mockito.mock(WriterRepository.class);
+ WriterRepository mock = Mockito.spy(WriterRepository.class);
+
+ Мок — запрограммированный объект, возвращающий ожидаемый результат - stab, на вызов определенного метода
+ Позволяет тебе управлять поведением этого объекта через when(), thenReturn()
+ и проверять взаимодействие с ним через verify()
+ Все вызовы методов возвращают null, 0, false или пустые коллекции по умолчанию.
+
+ Spy частично мокирует реальный объект
+ по умолчанию шпион выполняет настоящие методы объекта, но можно переопределить поведение методов, как у мока
+ assertEquals(2, spyList.size()); // настоящий метод size() = 2
+ Mockito.doReturn(100).when(spyList).size(); // заглушаем size(), иеперь он возвращает 100
+ mock — ничего не делает без настройки
+ spy — вызывает реальные методы, если ты не переопределил их через when или doReturn
+
+Dummy — это объект, который передаётся в метод или конструктор только для заполнения параметра, но не используется внутри теста
+
+ @DoNotMock используется для указания того, что определённый тип не следует имитировать во время тестирования
+
+ @Captor используется в Mockito для захвата аргументов, с которыми вызывался метод на моке, в примере "hello"
+ List<String> mockList = mock(List.class);
+ mockList.add("hello");
+ ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+ verify(mockList).add(captor.capture());
+ assertEquals("hello", captor.getValue());
+
+ ArgumentMatcher используется в Mockito, когда тебе нужно гибко указать, какие аргументы принимает мок
+ when(flowerService.analyze("poppy")).thenReturn("Flower"); - стаб сработает только если метод вызовут с "poppy"."rose" —> вернёт null
+ when(flowerService.analyze(anyString())).thenReturn("Flower") неважно, что передадут — "rose", "tulip" — результат всегда "Flower".
+
+ метод doAnswer() используется для задания поведения метода мока, особенно когда нужно обработать аргументы метода,
+ вернуть динамический результат или смоделировать callback
+ Он чаще применяется для void методов или когда нужно более гибкое поведение, чем просто thenReturn() или thenThrow()
+
+ работа с исключением
+ when(dictMock.getMeaning(anyString())).thenThrow(new NullPointerException("Error occurred")); // НЕ void метод
+ doThrow(new RuntimeException("DB error")).when(writerRepository).deleteById(1L); // void метод
+
+ verify не проверяет результат, а проверяет, что мок с определёнными аргументами и в нужном порядке был вызван.
+ verify → проверка взаимодействий с моками, assert → проверка результатов или состояния
+
+ lenient().when(mockList.add("one")).thenReturn(true);
+ Используется, когда stub нужен, но не обязательно вызывается в тесте
+
+ Для их мокирования void методов используются специальные методы:
+ doNothing() – дефолтное поведение (ничего не делает)
+ doThrow() – выброс исключения
+ doAnswer() – кастомная логика через Answer
+ doCallRealMethod() – вызвать оригинальный метод (частичный мок)
+
+ Мокирование статического метода с аргументами
+ try (MockedStatic<StaticUtils> utilities = Mockito.mockStatic(StaticUtils.class)) {
+    utilities.when(() -> StaticUtils.range(2, 6)).thenReturn(Arrays.asList(10, 11, 12));
+    assertEquals(Arrays.asList(10, 11, 12), StaticUtils.range(2, 6));}

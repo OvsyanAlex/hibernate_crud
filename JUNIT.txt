@@ -1,0 +1,49 @@
+
+  CI/CD (Jenkins, GitHub Actions)
+  ↓
+  Maven / Gradle
+  ↓
+  Surefire / Failsafe Plugin
+  ↓
+  JUnit Platform Launcher  запуск тестов, заменяет Runner
+  ↓
+  Твои тесты
+
+  @TestInstance(TestInstance.Lifecycle.PER_METHOD)
+  Для каждого метода @Test создаётся новый экземпляр тестового класса
+  Это гарантирует изоляцию тестов — они не влияют друг на друга
+  нестатические методы в @BeforeAll и @AfterAll
+
+  @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+  Для всего класса тестов создаётся один экземпляр
+  статические методы @BeforeAll и @AfterAll
+  нужно быть осторожным: поля тестового класса могут сохранять состояние между тестами
+
+  @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+  порядок выполнения тестов не гарантирован, указанным тегом можно задавать различный порядок выполнения
+
+  @Tag("writer") для запуска групп тестов по тегам
+  устанавливается над тестами или над вложенным классом который содержит тесты
+  при использовании над вложенным классом также необходима аннотация @Nested
+
+  @DisplayName("Проверка: метод возвращает true, если пользователь существует") - аннотация для отчета
+  @Disabled("comment") - skip test
+  @RepeatedTest(5) перезапуск теста с указанием количества запусков
+
+  Дата провайдер
+  можно устанавливать над тестом аннотации которые предоставляют тесту аргументы
+  @ParameterizedTest - помечает тест аргументы для которого будут поставляться из аннотаций
+  @NullSource
+  @EmptySource
+  @MethodSource(путь на статический метод который возвращает Stream<Arguments> тестовых аргументов)
+  @CsvFileSource файл с набором тестовых данных или наборы данных переданных в аннотации
+  и другие
+
+  Extention Model
+  возможность выполнять действия между основными итерациями жизненного цикла
+  ЖЦ @BeforeAll @BeforeEach @Test @AfterEach @AfterAll
+
+  создание съюта
+  @Suite
+  @SelectClasses({ CalculatorTest.class, MathUtilsTest.class })
+  public class AllTestsSuite {}

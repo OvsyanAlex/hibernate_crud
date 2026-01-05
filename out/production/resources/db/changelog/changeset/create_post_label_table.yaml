@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: create
+      author: Alex
+      changes:
+        - createTable:
+            tableName: post_label
+            schemaName: public
+            columns:
+              - column:
+                  name: post_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: label_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+            primaryKey:
+              columnNames: post_id, label_id
+              constraintName: pk_post_label
+
+        - addForeignKeyConstraint:
+            baseTableName: post_label
+            baseColumnNames: post_id
+            constraintName: fk_post_label_post
+            referencedTableName: post
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: post_label
+            baseColumnNames: label_id
+            constraintName: fk_post_label_label
+            referencedTableName: label
+            referencedColumnNames: id

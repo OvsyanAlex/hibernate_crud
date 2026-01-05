@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changeset/create_writer_table.yaml
+  - include:
+      file: db/changelog/changeset/create_post_table.yaml
+  - include:
+      file: db/changelog/changeset/create_label_table.yaml
+  - include:
+      file: db/changelog/changeset/create_post_label_table.yaml
+  - include:
+      file: db/changelog/changeset/create_writer_post_table.yaml

@@ -1,0 +1,37 @@
+databaseChangeLog:
+#  - changeSet:
+#      id: create-public-schema
+#      author: Alex
+#      preConditions:
+#        - onFail: MARK_RAN
+#        - not:
+#            schemaExists: public
+#      changes:
+#        - sql:
+#            sql: CREATE SCHEMA public;
+
+  - changeSet:
+      id: create
+      author: Alex
+      changes:
+        - createTable:
+            tableName: label
+            schemaName: public
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(200)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(50)
+                  constraints:
+                    nullable: false

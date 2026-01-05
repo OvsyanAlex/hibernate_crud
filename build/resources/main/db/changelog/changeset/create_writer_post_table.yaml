@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: create
+      author: Alex
+      changes:
+        - createTable:
+            tableName: writer_post
+            schemaName: public
+            columns:
+              - column:
+                  name: writer_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: post_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+            primaryKey:
+              columnNames: writer_id, post_id
+              constraintName: pk_writer_post
+
+        - addForeignKeyConstraint:
+            baseTableName: writer_post
+            baseColumnNames: writer_id
+            constraintName: fk_writer_post_writer
+            referencedTableName: writer
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: writer_post
+            baseColumnNames: post_id
+            constraintName: fk_writer_post_post
+            referencedTableName: post
+            referencedColumnNames: id
