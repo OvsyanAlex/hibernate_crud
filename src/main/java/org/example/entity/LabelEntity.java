@@ -21,7 +21,7 @@ public class LabelEntity {
     private Status status;
 
     @ManyToMany(mappedBy = "labels", fetch = FetchType.LAZY)
-    private Set<PostEntity> posts = new HashSet<>();;
+    private Set<PostEntity> posts = new HashSet<>();
 
     public LabelEntity(Long id, String name, Status status) {
         this.id = id;

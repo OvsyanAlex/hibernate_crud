@@ -1,0 +1,31 @@
+главный changelog-master.yaml содержит перечень changeSet'ов: changeSet-1.0.sql + changeSet-2.0.sql + ...
+changeSet должен содержать название, id, author на основе которых строится первичный ключ для DATABASECHANGELOG - главная таблица истории
+Liquibase последовательно выполняет changeSet’ы и запоминает факт их выполнения
+Если changeSet был выполнен — он никогда не выполнится снова(если только не вмешаться вручную)
+DATABASECHANGELOGLOCK - механизм блокировки самого себя для последовательного выполнения changeSet'ов
+
+Загружает все changeSet’ы из changelog’ов
+Читает DATABASECHANGELOG
+Для каждого changeSet:
+ищет строку по (id, author, filename)
+если нашёл → пропускает
+если не нашёл → выполняет
+НЕ смотрит на состояние БД (есть ли таблица, колонка и т.п.)
+
+Liquibase = Git log для БД
+changeSet = commit
+DATABASECHANGELOG = история коммитов
+переписал commit → несовпадение чек-суммы changeSet'a -> конфликт
+
+ # скрипты возможны на SQL, YAML, XML, JSON
+ # Rollback = способ вернуть БД в состояние, совместимое со старым кодом
+    rollback = выполнить обратные changeSet'ы или rollback = новая миграция
+    Rollback пишется прямо в changeSet - Выполняется командой rollback при необходимости
+
+ # в данном проекте скрипты выполняются в классе LiquibaseRunner который вызывается в main class
+ # Spring Boot сам запускает Liquibase при старте приложения, нужны
+    зависимость implementation 'org.liquibase:liquibase-core'
+    src/main/resources/db/changelog/db.changelog-master.yaml
+    DataSource тот же что и hibernate
+    для hibernate указать в application.yaml ddl-auto: none = Liquibase — единственный, кто меняет схему
+    если путь стандартный это все

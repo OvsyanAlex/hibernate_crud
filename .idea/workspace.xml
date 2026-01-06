@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b5db4d3-c08e-43d9-a78a-145b726d2960" name="Changes" comment="first commit" />
+    <list default="true" id="3b5db4d3-c08e-43d9-a78a-145b726d2960" name="Changes" comment="first commit">
+      <change afterPath="$PROJECT_DIR$/liquibase.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/entity/LabelEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/entity/LabelEntity.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,6 +49,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "OvsyanAlex"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/OvsyanAlex/hibernate_crud.git",
+    "accountId": "ec761bc4-7248-4a00-9830-cb563b1ec0eb"
+  }
+}]]></component>
   <component name="GradleScriptDefinitionsStorage" workingDir="$PROJECT_DIR$" gradleHome="C:\Users\User\.gradle\wrapper\dists\gradle-9.0.0-bin\d6wjpkvcgsg3oed0qlfss3wgl\gradle-9.0.0" javaHome="C:\Program Files\Java\jdk-21" gradleVersion="9.0.0" />
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -82,7 +98,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "my-new-branch",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Java/JavaProjects/hibernate_crud",
     "node.js.detected.package.eslint": "true",
@@ -277,6 +293,8 @@
       <workItem from="1765121550149" duration="688000" />
       <workItem from="1765799792735" duration="1408000" />
       <workItem from="1767628447210" duration="282000" />
+      <workItem from="1767628748899" duration="2004000" />
+      <workItem from="1767697934046" duration="4213000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -299,6 +317,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="app.properties" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
